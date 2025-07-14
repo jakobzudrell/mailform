@@ -83,7 +83,7 @@ export class EmailService {
      * @param files Formidable files
      * @return Promise<boolean|Error> True if success, error object if not success
      */
-    public static async sendMail(targetName: string, from: string, subject: string, body: string, files: FormidableFiles): Promise<boolean|Error> {
+    public static async sendMail(targetName: string, from: string, replyTo: string, subject: string, body: string, files: FormidableFiles): Promise<boolean|Error> {
 
         if(!this.targetTransports.has(targetName)) return false;
 
@@ -94,7 +94,7 @@ export class EmailService {
         try {
             await transporter.sendMail({
                 from,
-                replyTo: from,
+                replyTo: replyTo,
                 to: target.recipients,
                 subject,
                 html: body,
